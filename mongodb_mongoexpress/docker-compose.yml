@@ -1,0 +1,35 @@
+
+version: '3'
+
+services:
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8082:8082
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: jp
+      ME_CONFIG_BASICAUTH_PASSWORD: user@123
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin@123
+    links:
+      - mongo
+    networks:
+      - mongo-network
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin@123
+    ports:
+      - "27017:27017"
+    # volumes:
+    #   - /home/{user}/containers/volumes/mongodb/data-db:/data/db
+    #   - /home/{user}/containers/volumes/mongodb/config-db:/data/configdb
+    networks:
+      - mongo-network
+
+networks: 
+    mongo-network:
+      driver: bridge

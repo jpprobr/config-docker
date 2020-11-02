@@ -1,0 +1,20 @@
+version: "3"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - config:/etc/rabbitmq/
+      - lib:/var/lib/rabbitmq/
+      - logs:/var/log/rabbitmq/
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=jpsanet
+      - RABBITMQ_DEFAULT_PASS=Teste123
+
+volumes:
+  config:
+  lib:
+  logs:

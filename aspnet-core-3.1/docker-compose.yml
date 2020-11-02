@@ -1,0 +1,14 @@
+services:
+    myapi:
+      image: myapi
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports:
+        - "5555:80"
+      networks:
+        - product-network
+  
+  networks:
+      product-network:
+          driver: bridge
